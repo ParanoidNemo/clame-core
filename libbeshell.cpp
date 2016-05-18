@@ -4,10 +4,12 @@
 #define DBOUT 0 && cout
 #endif
 
+#include "libbeshell.h"
+#include "helpers.h"
+
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include "libbeshell.h"
 
 using namespace std;
 

@@ -28,11 +28,14 @@ bool Helpers::fileExists(string file)
 
 bool Helpers::dirExists(string dir)
 {
-	DIR *pd = "";
+	DIR *pd;
 	
 	pd = opendir(dir.c_str());
 	
-	if (pd != NULL) return true;
+	if (pd != NULL) { 
+		closedir(pd);
+		return true;
+	}
 	else return false;
 }
 

@@ -15,6 +15,7 @@ public:
 	~Helpers();
 	
 	bool fileExists(string);
+	bool dirExists(string);
 	vector<string> split(const string &, char, vector<string>);
 	string readPipe(const char *);
 };

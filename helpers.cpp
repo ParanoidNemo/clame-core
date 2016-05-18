@@ -6,17 +6,16 @@
 #include <stdio.h>
 #include <vector>
 #include <sstream>
+#include <dirent.h>
 
 using namespace std;
 
-Helpers::Helpers(void)
+Helpers::Helpers()
 {
-	
 }
 
-Helpers::~Helpers(void)
+Helpers::~Helpers()
 {
-	
 }
 
 bool Helpers::fileExists(string file)
@@ -24,6 +23,16 @@ bool Helpers::fileExists(string file)
 	ifstream f;
 	f.open(file, ios::in);
 	if (f.is_open()) return true; 
+	else return false;
+}
+
+bool Helpers::dirExists(string dir)
+{
+	DIR *pd = "";
+	
+	pd = opendir(dir.c_str());
+	
+	if (pd != NULL) return true;
 	else return false;
 }
 

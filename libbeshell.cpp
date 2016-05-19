@@ -44,10 +44,10 @@ Default::Default()
 	if (!check) ss << home << "/.kde/share/config/";
 	else ss << home << "/.kde4/share/config/";
 	cfgDir = ss.str();
-
+	
 	ss << "be.shell";
 	mnFile = ss.str(); ss.str(string());
-
+	
 	ss << home << "/.kde4/share/apps/be.shell/";
 	mnDir = ss.str();
 }

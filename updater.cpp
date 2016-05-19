@@ -24,14 +24,21 @@
 
 #include <string>
 #include <vector>
+#include <iostream>
+#include <map>
 
 using namespace std;
 
 Updater::Updater()
 {
 	vector<string> info;
+	
 	SystemInfo s;
 	Helpers h;
+	
+	info = h.gatherSysInfo(s, info);
+	
+	packageManager = packageManagerList[info[1]];
 }
 
 Updater::~Updater()

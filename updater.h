@@ -24,6 +24,8 @@
 #include <string>
 #include <map>
 
+using namespace std;
+
 class Updater
 {
 public:
@@ -31,9 +33,11 @@ public:
 	~Updater();
 	
 private:
-	map<string,string> packageManager = {{"Arch Linux", "pacman"}, 
-										 {"Ubuntu", "aptitude"}, 
-										 {"Fedora", "dnf"}};
+	map<string,string> packageManagerList = {{"Arch Linux", "pacman"}, 
+											 {"Ubuntu", "aptitude"}, 
+											 {"Fedora", "dnf"}};
+											 
+	string packageManager;
 };
 
 #endif //UPDATER_H

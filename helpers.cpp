@@ -148,7 +148,7 @@ string SystemInfo::getLinuxDistro()
 	
 	Helpers h;
 	
-	if (!(h.fileExists(file))) return out = "Could not define distro.";
+	if (!(h.fileExists(file))) return out = "Could not retrive distro.";
 	
 	f.open(file, ios::in);
 	

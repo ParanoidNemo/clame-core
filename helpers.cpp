@@ -91,6 +91,7 @@ string Helpers::readPipe(const char *cmd)	// Need to modify to use a bigger buff
 	while(fgets(buff, sizeof(buff), in) != NULL) {
 		string str(buff);
 		output = output + str;
+		output.erase(output.size()-1);
 	}
 	
 	pclose(in);
@@ -110,14 +111,12 @@ vector<string> Helpers::split(const string &s, char delim, vector<string> elems)
 	return elems;
 }
 
-void Helpers::gatherSysInfo(SystemInfo s)
+vector<string> Helpers::gatherSysInfo(SystemInfo s, vector<string> v)
 {
-	SystemInfo *o;
+	v.push_back(s.arch);
+	v.push_back(s.distro);
 	
-	o = &s;
-	
-	cout << "Architecture: " << o->arch;
-	cout << "Distro: " << o->distro << endl;
+	return v;
 }
 
 SystemInfo::SystemInfo()

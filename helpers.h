@@ -55,7 +55,7 @@ public:
 	vector<string> split(const string &, char, vector<string>);
 	vector<string> linesFrom(string);
 	string readPipe(const char *);
-	void gatherSysInfo(SystemInfo);
+	vector<string> gatherSysInfo(SystemInfo, vector<string>);
 };
 
 

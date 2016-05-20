@@ -31,14 +31,14 @@ using namespace std;
 
 Updater::Updater()
 {
-	vector<string> info;
+	vector<string> *i;
 	
 	SystemInfo s;
 	Helpers h;
 	
-	info = h.gatherSysInfo(s, info);
+	h.gatherSysInfo(s, i);
 	
-	packageManager = packageManagerList[info[1]];
+	packageManager = packageManagerList[h.info[1]];
 }
 
 Updater::~Updater()

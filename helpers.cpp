@@ -120,6 +120,13 @@ void Helpers::gatherSysInfo(SystemInfo s, vector<string> *v)
 	v->push_back(s.distro);
 }
 
+void Helpers::sendMessage(string *msg)
+{
+	msg = &message;
+	
+	cout << *msg << endl;
+}
+
 SystemInfo::SystemInfo()
 {
 	string *a;

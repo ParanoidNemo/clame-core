@@ -57,7 +57,10 @@ public:
 	string readPipe(const char *);
 	void gatherSysInfo(SystemInfo, vector<string>*);
 	
+	void sendMessage(string *);
+	
 	vector<string> info;
+	string message;
 };
 
 

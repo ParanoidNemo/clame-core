@@ -32,6 +32,7 @@ using namespace std;
 
 Helpers::Helpers()
 {
+	//info = {};
 }
 
 Helpers::~Helpers()
@@ -111,43 +112,48 @@ vector<string> Helpers::split(const string &s, char delim, vector<string> elems)
 	return elems;
 }
 
-vector<string> Helpers::gatherSysInfo(SystemInfo s, vector<string> v)
+void Helpers::gatherSysInfo(SystemInfo s, vector<string> *v)
 {
-	v.push_back(s.arch);
-	v.push_back(s.distro);
+	v = &info;
 	
-	return v;
+	v->push_back(s.arch);
+	v->push_back(s.distro);
 }
 
 SystemInfo::SystemInfo()
 {
-	arch = getArchitecture();
-	distro = getLinuxDistro();
+	string *a;
+	string *d;
+	
+	getArchitecture(a);
+	getLinuxDistro(d);
 }
 
 SystemInfo::~SystemInfo()
 {
 }
 
-string SystemInfo::getArchitecture()
+void SystemInfo::getArchitecture(string *o)
 {
 	Helpers h;
 	const char *cmd = "uname -m";
 	
-	string out = h.readPipe(cmd);
+	o = &arch;
 	
-	return out;
+	*o = h.readPipe(cmd);
 }
 
-string SystemInfo::getLinuxDistro()
+void SystemInfo::getLinuxDistro(string *o)
 {
 	ifstream f;
 	string line, out, prefix = "NAME=";
 	string file = "/etc/os-release";
 	
+	o = &distro;
+	
 	Helpers h;
 	
-	if (!(h.fileExists(file))) return out = "Could not retrive distro.";
+	if (!(h.fileExists(file))) *o = "Could not retrive distro.";
 	
 	f.open(file, ios::in);
 	
@@ -155,9 +161,7 @@ string SystemInfo::getLinuxDistro()
 		getline(f, line);
 		if(line.substr(0, prefix.size()) == prefix) {
 			line = line.substr(prefix.size()+1);
-			out = line.erase(line.size()-1);
+			*o = line.erase(line.size()-1);
 		} f.close();
 	}
-	
-	return out;
 }

@@ -37,8 +37,8 @@ public:
 	~SystemInfo();
 	
 private:
-	string getArchitecture();
-	string getLinuxDistro();
+	void getArchitecture(string *);
+	void getLinuxDistro(string *);
 	
 	string arch;
 	string distro;
@@ -55,7 +55,9 @@ public:
 	vector<string> split(const string &, char, vector<string>);
 	vector<string> linesFrom(string);
 	string readPipe(const char *);
-	vector<string> gatherSysInfo(SystemInfo, vector<string>);
+	void gatherSysInfo(SystemInfo, vector<string>*);
+	
+	vector<string> info;
 };
 
 

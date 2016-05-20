@@ -44,3 +44,21 @@ Updater::Updater()
 Updater::~Updater()
 {
 }
+
+void Updater::checkUpdates(string *up)
+{
+	up = &updates;
+	string *msg;
+	
+	Helpers h;
+	h.message = "Checking Updates...";
+	
+	if (packageManager == "pacman") {
+		h.sendMessage(msg);
+		*up = h.readPipe("checkupdates | wc -l");
+	} else if (packageManager == "aptitude") {
+		*up = "";
+	} else if (packageManager == "dnf") {
+		*up = "";
+	} else cout << "Package Manager not found";
+}

@@ -32,6 +32,10 @@ public:
 	Updater();
 	~Updater();
 	
+	void checkUpdates(string *);
+	
+	string updates;
+	
 private:
 	map<string,string> packageManagerList = {{"Arch Linux", "pacman"}, 
 											 {"Ubuntu", "aptitude"}, 

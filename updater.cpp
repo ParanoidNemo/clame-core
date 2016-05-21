@@ -31,12 +31,10 @@ using namespace std;
 
 Updater::Updater()
 {
-	vector<string> *i;
-	
 	SystemInfo s;
 	Helpers h;
 	
-	h.gatherSysInfo(s, i);
+	h.gatherSysInfo(s);
 	
 	packageManager = packageManagerList[h.info[1]];
 }
@@ -48,17 +46,17 @@ Updater::~Updater()
 void Updater::checkUpdates(string *up)
 {
 	up = &updates;
-	string *msg;
 	
 	Helpers h;
-	h.message = "Checking Updates...";
 	
 	if (packageManager == "pacman") {
-		h.sendMessage(msg);
+		h.sendMessage("Checking Updates...");
 		*up = h.readPipe("checkupdates | wc -l");
 	} else if (packageManager == "aptitude") {
 		*up = "";
 	} else if (packageManager == "dnf") {
 		*up = "";
-	} else cout << "Package Manager not found";
+	} else {
+		h.sendMessage("ERROR: Package Manager not found!");
+	}
 }

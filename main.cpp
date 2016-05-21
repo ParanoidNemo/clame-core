@@ -22,10 +22,19 @@
 #include "fs.h"
 
 #include <iostream>
+#include <thread>
+
+using namespace std;
 
 int main(int argc, char **argv)
 {
 	Fs w("/");
+	
+	/*
+	thread fs(printInfo, w);
+	fs.detach();
+	*/
+	
 	printInfo(w);
 	return 0;
 }

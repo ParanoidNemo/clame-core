@@ -30,24 +30,27 @@ using namespace std;
 
 Fs::Fs()
 {
+	/*
 	files = "";
 	tots = "";
 	useds = "";
 	frees = "";
 	percus = "";
 	mountp = "";
+	*/
 }
 
 Fs::Fs(const char *name)
 {
+	vector<string> lines;
 	char cmd[] = "df -h ";
 	
 	strcat(cmd, name);
 	
 	Helpers h;
 	string info = h.readPipe(cmd);
-	lines = h.split(info, '\n', item);
-	out = h.split(lines[1], ' ', item);
+	lines = h.split(info, '\n', lines);
+	out = h.split(lines[1], ' ', out);
 	
 	files = out[0];
 	tots = out[1];

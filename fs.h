@@ -28,16 +28,16 @@ using namespace std;
 
 class Fs
 {
+	friend void printInfo(Fs);
+	
 public:
 	Fs();
 	Fs(const char *);
 	~Fs();
 	
-	friend void printInfo(Fs);
-	
 private:
 	string mountp, frees, tots, useds, percus, files;
-	vector<string> lines, out, item;
+	vector<string> out;
 };
 
 #endif //FS_H

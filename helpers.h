@@ -37,8 +37,8 @@ public:
 	~SystemInfo();
 	
 private:
-	void getArchitecture(string *);
-	void getLinuxDistro(string *);
+	void getArchitecture();
+	void getLinuxDistro();
 	
 	string arch;
 	string distro;
@@ -53,12 +53,13 @@ public:
 	bool fileExists(string);
 	bool dirExists(string);
 	vector<string> split(const string &, char, vector<string>);
-	vector<string> linesFrom(string);
+	void linesFrom(string);
 	string readPipe(const char *);
-	void gatherSysInfo(SystemInfo, vector<string>*);
+	void gatherSysInfo(SystemInfo);
 	
-	void sendMessage(string *);
+	void sendMessage(string);
 	
+	vector<string> lines;
 	vector<string> info;
 	string message;
 };

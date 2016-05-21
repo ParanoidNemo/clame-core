@@ -63,22 +63,21 @@ bool Helpers::dirExists(string dir)
 	else return false;
 }
 
-vector<string> Helpers::linesFrom(string file)
+void Helpers::linesFrom(string file)
 {
-	vector<string> output;
+	vector<string> *output;
+	output = &lines;
 	ifstream f;
 	string line;
 	
 	Helpers h;
-	if (!(h.fileExists(file))) return output;
+	if (!(h.fileExists(file))) h.sendMessage("ERROR: file doesn't exists or is unreadable");
 	
 	f.open(file, ios::in);
 	while (f.good()) {
 		getline(f, line);
-		if (line != "") output.push_back(line);
+		if (line != "") output->push_back(line);
 	} f.close();
-	
-	return output;
 }
 
 string Helpers::readPipe(const char *cmd)	// Need to modify to use a bigger buffer without using char
@@ -92,7 +91,7 @@ string Helpers::readPipe(const char *cmd)	// Need to modify to use a bigger buff
 	while(fgets(buff, sizeof(buff), in) != NULL) {
 		string str(buff);
 		output = output + str;
-		output.erase(output.size()-1);
+		//output.erase(output.size()-1);
 	}
 	
 	pclose(in);
@@ -112,50 +111,56 @@ vector<string> Helpers::split(const string &s, char delim, vector<string> elems)
 	return elems;
 }
 
-void Helpers::gatherSysInfo(SystemInfo s, vector<string> *v)
+void Helpers::gatherSysInfo(SystemInfo s)
 {
+	vector<string> *v;
 	v = &info;
 	
 	v->push_back(s.arch);
 	v->push_back(s.distro);
 }
 
-void Helpers::sendMessage(string *msg)
+void Helpers::sendMessage(string m)
 {
+	string *msg;
 	msg = &message;
+	
+	*msg = m;
 	
 	cout << *msg << endl;
 }
 
 SystemInfo::SystemInfo()
 {
-	string *a;
-	string *d;
-	
-	getArchitecture(a);
-	getLinuxDistro(d);
+	getArchitecture();
+	getLinuxDistro();
 }
 
 SystemInfo::~SystemInfo()
 {
 }
 
-void SystemInfo::getArchitecture(string *o)
+void SystemInfo::getArchitecture()
 {
 	Helpers h;
 	const char *cmd = "uname -m";
 	
+	string *o;
 	o = &arch;
 	
-	*o = h.readPipe(cmd);
+	string s = h.readPipe(cmd);
+	s.erase(s.size()-1);
+	
+	*o = s;
 }
 
-void SystemInfo::getLinuxDistro(string *o)
+void SystemInfo::getLinuxDistro()
 {
 	ifstream f;
 	string line, out, prefix = "NAME=";
 	string file = "/etc/os-release";
 	
+	string *o;
 	o = &distro;
 	
 	Helpers h;

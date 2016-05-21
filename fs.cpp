@@ -49,8 +49,8 @@ Fs::Fs(const char *name)
 	
 	Helpers h;
 	string info = h.readPipe(cmd);
-	lines = h.split(info, '\n', lines);
-	out = h.split(lines[1], ' ', out);
+	lines = h.split(info, '\n');
+	out = h.split(lines[1], ' ');
 	
 	files = out[0];
 	tots = out[1];

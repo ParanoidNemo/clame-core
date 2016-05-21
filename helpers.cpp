@@ -91,7 +91,6 @@ string Helpers::readPipe(const char *cmd)	// Need to modify to use a bigger buff
 	while(fgets(buff, sizeof(buff), in) != NULL) {
 		string str(buff);
 		output = output + str;
-		//output.erase(output.size()-1);
 	}
 	
 	pclose(in);
@@ -99,8 +98,9 @@ string Helpers::readPipe(const char *cmd)	// Need to modify to use a bigger buff
 	return output;
 }
 
-vector<string> Helpers::split(const string &s, char delim, vector<string> elems)
+vector<string> Helpers::split(const string &s, char delim)
 {
+	vector<string> elems;
 	stringstream ss(s);
 	string item;
 	while (getline(ss, item, delim)) {

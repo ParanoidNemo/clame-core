@@ -70,22 +70,21 @@ public:
 	Helpers();
 	~Helpers();
 	
-	bool fileExists(string);										// Check if a given file exists
-	bool dirExists(string);											// Check if a given dir exists
-	vector<string> split(const string &, char, vector<string>);		// Split a given string by delimitator
-	void linesFrom(string);											// Retrive all lines from a file and store
-																	// it into lines tmp var
-	string readPipe(const char *);									// Return output from a unix command
-	void gatherSysInfo(SystemInfo);									// Retrive info from SystemInfo costructor
-																	// and store it into info tmp var
+	bool fileExists(string);						// Check if a given file exists
+	bool dirExists(string);							// Check if a given dir exists
+	vector<string> split(const string &, char);		// Split a given string by delimitator
+	void linesFrom(string);							// Retrive all lines from a file and store it into lines
+													// tmp var
+	string readPipe(const char *);					// Return output from a unix command
+	void gatherSysInfo(SystemInfo);					// Retrive info from SystemInfo costructor and store it
+													// into info tmp var
 	
-	void sendMessage(string);										// Store a string into message tmp var and
-																	// print it into terminal -- Right now used
-																	// expecially for debug porpouse
+	void sendMessage(string);						// Store a string into message tmp var and print it into
+													// terminal -- Right now used expecially for debug porpouse
 	
-	vector<string> lines;											// tmp var for storing linesFrom output
-	vector<string> info;											// tmp var for storing gatherSysInfo output
-	string message;													// tmp var for storing sendMessage input
+	vector<string> lines;							// tmp var for storing linesFrom output
+	vector<string> info;							// tmp var for storing gatherSysInfo output
+	string message;									// tmp var for storing sendMessage input
 };
 
 

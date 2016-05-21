@@ -9,5 +9,8 @@ project(${PROJECT_NAME})
 ## Use all the *.cpp files we found under this folder for the project
 FILE(GLOB SRCS "*.cpp" "*.c")
 
+## Linking against specific libraries
+##target_link_libraries() 	NEED FURTHER TESTING
+
 ## Define the executable
 add_executable(${PROJECT_NAME} ${SRCS})

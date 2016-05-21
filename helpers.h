@@ -28,6 +28,17 @@
 
 using namespace std;
 
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * SystemInfo										   *
+ * 													   *
+ * class used to retrive informations about the system *
+ * like distro name, architecture, kernel version etc. *
+ * All the infos are gathered into the costructor and  *
+ * could be retrived using the function gatherSysInfo  *
+ * located under the friend class Helpers			   *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
 class SystemInfo
 {
 	friend class Helpers;
@@ -37,12 +48,21 @@ public:
 	~SystemInfo();
 	
 private:
-	void getArchitecture();
-	void getLinuxDistro();
+	void getArchitecture();		// Set arch variable with the system architecture
+	void getLinuxDistro();		// Set distro variable with the distro name
 	
 	string arch;
 	string distro;
 };
+
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * Helpers											   *
+ * 													   *
+ * class containing simple methods used more times	   *
+ * into the main program. All methods and var are set  *
+ * to public for better usability					   *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 class Helpers
 {
@@ -50,18 +70,22 @@ public:
 	Helpers();
 	~Helpers();
 	
-	bool fileExists(string);
-	bool dirExists(string);
-	vector<string> split(const string &, char, vector<string>);
-	void linesFrom(string);
-	string readPipe(const char *);
-	void gatherSysInfo(SystemInfo);
+	bool fileExists(string);										// Check if a given file exists
+	bool dirExists(string);											// Check if a given dir exists
+	vector<string> split(const string &, char, vector<string>);		// Split a given string by delimitator
+	void linesFrom(string);											// Retrive all lines from a file and store
+																	// it into lines tmp var
+	string readPipe(const char *);									// Return output from a unix command
+	void gatherSysInfo(SystemInfo);									// Retrive info from SystemInfo costructor
+																	// and store it into info tmp var
 	
-	void sendMessage(string);
+	void sendMessage(string);										// Store a string into message tmp var and
+																	// print it into terminal -- Right now used
+																	// expecially for debug porpouse
 	
-	vector<string> lines;
-	vector<string> info;
-	string message;
+	vector<string> lines;											// tmp var for storing linesFrom output
+	vector<string> info;											// tmp var for storing gatherSysInfo output
+	string message;													// tmp var for storing sendMessage input
 };
 
 

@@ -32,7 +32,6 @@ using namespace std;
 
 Helpers::Helpers()
 {
-	//info = {};
 }
 
 Helpers::~Helpers()
@@ -61,6 +60,17 @@ bool Helpers::dirExists(string dir)
 		return true;
 	}
 	else return false;
+}
+
+void Helpers::vClear()
+{
+	lines.clear();
+	info.clear();
+}
+
+void Helpers::vClear(vector<string> &v)
+{
+	v.clear();
 }
 
 void Helpers::linesFrom(string file)

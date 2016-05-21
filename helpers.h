@@ -72,6 +72,8 @@ public:
 	
 	bool fileExists(string);						// Check if a given file exists
 	bool dirExists(string);							// Check if a given dir exists
+	void vClear();									// Clear all tmp vector in helpers
+	void vClear(vector<string> &);					// Clear the given vector
 	vector<string> split(const string &, char);		// Split a given string by delimitator
 	void linesFrom(string);							// Retrive all lines from a file and store it into lines
 													// tmp var

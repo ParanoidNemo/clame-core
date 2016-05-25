@@ -25,6 +25,8 @@
 #include <string>
 #include <fstream>
 #include <vector>
+#include <map>
+#include <regex>
 
 using namespace std;
 
@@ -84,9 +86,14 @@ public:
 	void sendMessage(string);						// Store a string into message tmp var and print it into
 													// terminal -- Right now used expecially for debug porpouse
 	
+	string escapeStr(string);						// Add escape sequence to { in string *NEED IMPROVEMENTS*
+	vector<string> mapKeys(map<string,string>)		// Retrive keys from given map
+	void insertData(string, regex, map<string,string>, vector<string>)
+	
 	vector<string> lines;							// tmp var for storing linesFrom output
 	vector<string> info;							// tmp var for storing gatherSysInfo output
 	string message;									// tmp var for storing sendMessage input
+	string out;										// tmp var for storing insertData output
 };
 
 

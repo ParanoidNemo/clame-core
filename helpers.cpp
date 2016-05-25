@@ -27,6 +27,8 @@
 #include <vector>
 #include <sstream>
 #include <dirent.h>
+#include <map>
+#include <regex>
 
 using namespace std;
 
@@ -80,8 +82,8 @@ void Helpers::linesFrom(string file)
 	ifstream f;
 	string line;
 	
-	Helpers h;
-	if (!(h.fileExists(file))) h.sendMessage("ERROR: file doesn't exists or is unreadable");
+	//Helpers h;
+	if (!(fileExists(file))) sendMessage("ERROR: file doesn't exists or is unreadable");
 	
 	f.open(file, ios::in);
 	while (f.good()) {
@@ -100,7 +102,7 @@ string Helpers::readPipe(const char *cmd)	// Need to modify to use a bigger buff
 	
 	while(fgets(buff, sizeof(buff), in) != NULL) {
 		string str(buff);
-		output = output + str;
+		output += str;
 	}
 	
 	pclose(in);
@@ -139,6 +141,52 @@ void Helpers::sendMessage(string m)
 	
 	cout << *msg << endl;
 }
+
+string Helpers::escapeStr(string s)
+{
+    string o;
+
+    for (string::iterator it = s.begin(); it != s.end(); ++it) {
+        char c = *it;
+        if (c == '{') o += "\\{";
+        else if (c == '}') o += "\\}";
+        else o += c;
+    }
+
+    return o;
+}
+
+vector<string> Helpers::mapKeys(map<string,string> m)
+{
+    vector<string> v;
+
+    for (map<string,string>::iterator it = m.begin(); it != m.end(); ++it) {
+        v.push_back(it->first);
+    }
+
+    return v;
+}
+
+void Helpers::insertData(string in, regex re, map<string,string> m, vector<string> mk)
+{
+    //string *o = &out;
+    smatch s;
+
+    if (regex_search(in, s, re)) {
+
+        string k = escapeStr(s.str());
+        regex re_tmp(k);
+
+        for (int i = 0; i < mk.size(); i++) {
+            if (s.str() == mk[i]) {
+                out = regex_replace(in, re_tmp, m[s.str()]);
+                matches(out, re, m, mk);
+            }
+        }
+    }
+}
+
+//--------------------------------> Begin SystemInfo Definition
 
 SystemInfo::SystemInfo()
 {

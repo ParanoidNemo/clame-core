@@ -32,6 +32,8 @@
 
 using namespace std;
 
+//--------------------------------> Begin Helpers Definition
+
 Helpers::Helpers()
 {
 }
@@ -144,46 +146,46 @@ void Helpers::sendMessage(string m)
 
 string Helpers::escapeStr(string s)
 {
-    string o;
+	string o;
 
-    for (string::iterator it = s.begin(); it != s.end(); ++it) {
-        char c = *it;
-        if (c == '{') o += "\\{";
-        else if (c == '}') o += "\\}";
-        else o += c;
-    }
+	for (string::iterator it = s.begin(); it != s.end(); ++it) {
+		char c = *it;
+		if (c == '{') o += "\\{";
+		else if (c == '}') o += "\\}";
+		else o += c;
+	}
 
-    return o;
+	return o;
 }
 
 vector<string> Helpers::mapKeys(map<string,string> m)
 {
-    vector<string> v;
+	vector<string> v;
 
-    for (map<string,string>::iterator it = m.begin(); it != m.end(); ++it) {
-        v.push_back(it->first);
-    }
+	for (map<string,string>::iterator it = m.begin(); it != m.end(); ++it) {
+		v.push_back(it->first);
+	}
 
-    return v;
+	return v;
 }
 
 void Helpers::insertData(string in, regex re, map<string,string> m, vector<string> mk)
 {
-    //string *o = &out;
-    smatch s;
+	//string *o = &out;
+	smatch s;
 
-    if (regex_search(in, s, re)) {
+	if (regex_search(in, s, re)) {
 
-        string k = escapeStr(s.str());
-        regex re_tmp(k);
+		string k = escapeStr(s.str());
+		regex re_tmp(k);
 
-        for (int i = 0; i < mk.size(); i++) {
-            if (s.str() == mk[i]) {
-                out = regex_replace(in, re_tmp, m[s.str()]);
-                matches(out, re, m, mk);
-            }
-        }
-    }
+		for (int i = 0; i < mk.size(); i++) {
+			if (s.str() == mk[i]) {
+				out = regex_replace(in, re_tmp, m[s.str()]);
+				matches(out, re, m, mk);
+			} else out = regex_replace(in, re_tmp, "Key not found");
+		}
+	}
 }
 
 //--------------------------------> Begin SystemInfo Definition

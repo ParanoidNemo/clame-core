@@ -94,10 +94,9 @@ void Helpers::linesFrom(string file)
 	} f.close();
 }
 
-string Helpers::readPipe(const char *cmd)	// Need to modify to use a bigger buffer without using char
-{
+string Helpers::readPipe(const char *cmd)
 	FILE *in;
-	char buff[1024];
+	char buff[512];
 	string output = "";
 	
 	if(!(in = popen(cmd, "r"))) output = "Error: command not found";

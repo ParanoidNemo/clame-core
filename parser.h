@@ -34,8 +34,9 @@ public:
 	~Parser();
 	
 private:
-	map<string,string> main;
-	map<string,string> fs;
+    map<string,string> main;
+    string section;
+    vector<string> lines;
 };
 
 #endif // PARSER_H

@@ -40,17 +40,17 @@ Parser::Parser(string file)
 	f.open(file);
 	while (f.good()) {
 		getline(f, line);
-        if (string::iterator line[0] == '[') {
-            section = line.substr(line.begin()+1, line.size()-1);
-        } else lines = h.split(line, '=');
-        
-        if (section == "main") {
-            if (lines.size() > 1) main.emplace(lines[0], lines[1]);
-            h.vClear(lines);
-        } else if (section == "updater") {
-            if (lines.size() > 1) updater.emplace(lines[0], lines[1]);
-            h.vClear(lines);
-        }
+		if (string::iterator line[0] == '[') {
+			section = line.substr(line.begin()+1, line.size()-1);
+		} else lines = h.split(line, '=');
+
+		if (section == "main") {
+			if (lines.size() > 1) main.emplace(lines[0], lines[1]);
+			h.vClear(lines);
+		} else if (section == "updater") {
+			if (lines.size() > 1) updater.emplace(lines[0], lines[1]);
+			h.vClear(lines);
+		}
 	}
 }
 

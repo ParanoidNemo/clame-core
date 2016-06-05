@@ -50,11 +50,16 @@ Parser::Parser(string file)
 		} else if (section == "updater") {
 			if (lines.size() > 1) updater.emplace(lines[0], lines[1]);
 			h.vClear(lines);
+		} else if (section == "fs") {
+			if (lines.size() > 1) fs.emplace(lines[0], lines[1]);
+			h.vClear(lines);
 		}
 	}
 }
 
-/*
- * vector = h.split(string);
- * if (vector.size() > 1) map.emplace(vector[0], vector[1]);
- */
+string Parser::get(map<string,string> m, string s)
+{
+	string output = m[s];
+	
+	return output;
+}

@@ -33,8 +33,13 @@ public:
 	Parser(string);
 	~Parser();
 	
+	string get(map<string,string>, string);
+	
 private:
 	map<string,string> main;
+	map<string,string> updater;
+	map<string,string> fs;
+	
 	string section;
 	vector<string> lines;
 };
